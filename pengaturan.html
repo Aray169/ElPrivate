@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan — CoachLog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="sidebar">
+        <div>
+            <div class="brand">
+                <i class='bx bx-dumbbell'></i>
+                <span>CoachLog.</span>
+            </div>
+            
+            <ul class="menu-list">
+                <li>
+                    <a href="index.html" class="menu-item">
+                        <i class='bx bx-edit-alt'></i>
+                        <span>Input Report</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="riwayat.html" class="menu-item">
+                        <i class='bx bx-history'></i>
+                        <span>Riwayat Laporan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="klien.html" class="menu-item">
+                        <i class='bx bx-group'></i>
+                        <span>Daftar Klien</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pengaturan.html" class="menu-item active">
+                        <i class='bx bx-cog'></i>
+                        <span>Pengaturan</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="user-profile">
+            <i class='bx bxs-user-circle'></i>
+            <div class="user-info">
+                <h4>Head Coach</h4>
+                <p>Internal Operator</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTENT -->
+    <div class="main-content">
+        <div class="page-header">
+            <h2>Pengaturan Sistem</h2>
+            <p>Kelola profil instansi coach dan preferensi pesan otomatis dashboard.</p>
+        </div>
+        
+        <div class="panel">
+            <div class="form-group">
+                <label>Nama Head Coach</label>
+                <input type="text" id="input-head-coach" placeholder="Contoh: Coach Rafaeldo">
+            </div>
+            
+            <div class="form-group">
+                <label>Nama Gym / Studio / Kursus</label>
+                <input type="text" id="input-nama-kursus" placeholder="Contoh: Private Fitness Studio Inc.">
+            </div>
+            
+            <div class="form-group">
+                <label>Default Currency & Format</label>
+                <input type="text" value="IDR (Rp) - Indonesian Rupiah" disabled style="opacity: 0.6;">
+            </div>
+
+            <!-- Tombol Simpan Modern -->
+            <button onclick="simpanPengaturan()" style="background: #25D366; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+                <i class='bx bx-save' style="font-size: 1.2rem;"></i> Simpan Pengaturan
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,894 @@
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #0f172a;
+    color: #f1f5f9;
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* SIDEBAR STYLES */
+.sidebar {
+    width: 260px;
+    background-color: #1e293b;
+    border-right: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 16px;
+    transition: all 0.3s ease;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+    margin-bottom: 32px;
+}
+
+.brand i {
+    font-size: 28px;
+    color: #6366f1;
+}
+
+.brand span {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover, .menu-item.active {
+    color: #f8fafc;
+    background-color: #334155;
+}
+
+.menu-item.active {
+    background-color: #6366f1;
+    color: white;
+}
+
+.menu-item i {
+    font-size: 20px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 12px;
+    border-top: 1px solid #334155;
+    margin-top: auto;
+}
+
+.user-profile i {
+    font-size: 36px;
+    color: #6366f1;
+}
+
+.user-info h4 {
+    font-size: 14px;
+    color: #f8fafc;
+}
+
+.user-info p {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* MAIN CONTENT STYLES */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.page-header p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* CARD PANEL CONTAINER */
+.panel {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* FORM LOGIC */
+.form-group { 
+    margin-bottom: 20px; 
+}
+
+.form-row { 
+    display: flex; 
+    gap: 15px; 
+}
+
+.form-row .form-group { 
+    flex: 1; 
+}
+
+label { 
+    display: block; 
+    font-size: 12px; 
+    font-weight: 600; 
+    color: #94a3b8; 
+    text-transform: uppercase; 
+    margin-bottom: 8px; 
+    letter-spacing: 0.05em; 
+}
+
+input[type="text"], input[type="tel"], input[type="date"], select {
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid #475569; 
+    border-radius: 8px; 
+    font-size: 15px; 
+    color: #f8fafc; 
+    background-color: #0f172a; 
+    outline: none;
+}
+
+input:focus, select:focus { 
+    border-color: #6366f1; 
+}
+
+/* SESSION TABLE */
+.table-container { 
+    margin-top: 25px; 
+    overflow-x: auto; 
+}
+
+.session-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    text-align: left; 
+}
+
+.session-table th { 
+    font-size: 12px; 
+    text-transform: uppercase; 
+    color: #94a3b8; 
+    padding: 12px 8px; 
+    border-bottom: 2px solid #334155; 
+}
+
+.session-table td { 
+    padding: 10px 8px; 
+    border-bottom: 1px solid #334155; 
+    vertical-align: middle; 
+}
+
+/* BUTTONS */
+.btn-add-row { 
+    background-color: #334155; 
+    color: #f8fafc; 
+    border: 1px solid #475569; 
+    padding: 12px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    width: 100%; 
+    margin-top: 15px; 
+    font-weight: 600; 
+    transition: background 0.2s; 
+}
+
+.btn-add-row:hover { 
+    background-color: #475569; 
+}
+
+.btn-delete { 
+    background-color: #ef4444; 
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    font-size: 13px; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 4px; 
+}
+
+.btn-delete:hover { 
+    background-color: #dc2626; 
+}
+
+.btn-delete-sm { 
+    background-color: rgba(239, 68, 68, 0.2); 
+    color: #f87171; 
+    border: 1px solid rgba(239, 68, 68, 0.4); 
+    padding: 6px 10px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-size: 12px; 
+    font-weight: 500; 
+    transition: all 0.2s; 
+}
+
+.btn-delete-sm:hover { 
+    background-color: #ef4444; 
+    color: white; 
+}
+
+.summary-box { 
+    margin-top: 25px; 
+    padding: 20px; 
+    background-color: #0f172a; 
+    border-radius: 12px; 
+    border: 1px solid #334155; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.total-price { 
+    font-size: 22px; 
+    font-weight: 700; 
+    color: #10b981; 
+}
+
+.btn-submit { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 8px; 
+    width: 100%; 
+    background-color: #25d366; 
+    color: white; 
+    border: none; 
+    padding: 14px; 
+    font-size: 16px; 
+    font-weight: 600; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    margin-top: 20px; 
+}
+
+.btn-submit:hover { 
+    background-color: #20ba5a; 
+}
+
+/* DATA TABLE (Untuk Halaman Riwayat & Klien) */
+.data-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 15px; 
+}
+
+.data-table th, .data-table td { 
+    padding: 14px 16px; 
+    text-align: left; 
+    border-bottom: 1px solid #334155; 
+    vertical-align: middle; 
+}
+
+.data-table th { 
+    background-color: #0f172a; 
+    color: #94a3b8; 
+    font-size: 13px; 
+    text-transform: uppercase; 
+}
+
+.data-table tbody tr:hover { 
+    background-color: #243249; 
+}
+
+.badge { 
+    padding: 4px 8px; 
+    border-radius: 6px; 
+    font-size: 12px; 
+    font-weight: 600; 
+}
+
+.badge-success { 
+    background-color: rgba(16, 185, 129, 0.2); 
+    color: #10b981; 
+}
+
+/* Hiding pages initially */
+.page-content { 
+    display: none; 
+}
+
+.page-content.active { 
+    display: block; 
+}
+
+/* ==========================================
+   MODAL DETAIL STYLES
+   ========================================== */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(15, 23, 42, 0.75); 
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Munculkan modal dengan display flex via class JS nanti */
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.3s ease-out;
+    overflow: hidden;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.close-modal {
+    color: #94a3b8;
+    font-size: 28px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: #f1f5f9;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-meta-info {
+    background-color: #0f172a;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-meta-info p {
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+/* Buat baris tabel riwayat utama bisa diklik */
+.data-table tbody tr {
+    cursor: pointer;
+}
+
+/* ==========================================
+   MODAL EDIT PROGRAM STYLING (MODERN & CLEAN)
+   ========================================== */
+
+/* Overlay Latar Belakang Modal */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(15, 23, 42, 0.6); /* Backdrop agak blur/gelap transparan */
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tampilkan Modal dengan Flexbox saat kelas .show aktif */
+.modal.show {
+    display: flex;
+}
+
+/* Kontainer Utama Pop-up */
+.modal-content {
+    background-color: #1e293b; /* Slate 800 - Senada dengan background app */
+    color: #f8fafc;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #334155;
+    position: relative;
+    width: 90%;
+    max-width: 850px;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Tombol Close (Silang) di Pojok Kanan Atas */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #94a3b8;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #ef4444; /* Berubah merah saat di-hover */
+}
+
+/* Judul dan Header Modal */
+.modal-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.modal-content p {
+    color: #94a3b8;
+    margin: 0 0 24px 0;
+    font-size: 14px;
+}
+
+.modal-content p strong {
+    color: #3b82f6; /* Nama klien diberi warna aksen biru */
+}
+
+/* Styling Tabel Dinamis di Dalam Modal */
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+
+.main-table th {
+    text-align: left;
+    padding: 10px 12px;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+    border-bottom: 2px solid #334155;
+}
+
+.main-table td {
+    padding: 8px 6px;
+    vertical-align: middle;
+}
+
+/* Perbaikan Input, Select, & Date di dalam Modal */
+.modal-date-input,
+.modal-program-name-input,
+.modal-program-price-input,
+.modal-type-input {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #0f172a; /* Latar belakang input gelap (Slate 900) */
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #f8fafc; /* Warna teks putih/terang */
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.modal-date-input:focus,
+.modal-program-name-input:focus,
+.modal-program-price-input:focus,
+.modal-type-input:focus {
+    border-color: #3b82f6; /* Highlight biru saat fokus */
+}
+
+/* Menghilangkan spinner bawaan pada input number harga */
+.modal-program-price-input::-webkit-outer-spin-button,
+.modal-program-price-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Styling Tombol Aksi (+ Tambah Sesi) */
+.btn-add {
+    background-color: transparent;
+    color: #3b82f6;
+    border: 1px dashed #3b82f6;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-add:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Area Footer Modal (Total & Button Simpan) */
+.total-container {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #334155;
+}
+
+.total-container h4 {
+    margin: 0;
+    font-size: 15px;
+    color: #94a3b8;
+}
+
+/* Tombol Simpan Perubahan Utama */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background-color: #10b981; /* Hijau Emerald */
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    background-color: #059669;
+}
+
+/* ==========================================
+   PERBAIKAN TAMPILAN HALAMAN INPUT UTAMA
+   ========================================== */
+
+/* Merapikan susunan judul kolom tabel input agar presisi */
+.main-table th {
+    color: #64748b; /* Abu-abu muted profesional */
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: 12px;
+}
+
+/* Base style untuk semua field input di dalam tabel form utama */
+.date-input,
+.program-name-input,
+.program-price-input,
+.type-input {
+    width: 100%;
+    padding: 12px;
+    background-color: #0f172a !important; /* Memaksa warna latar gelap Slate 900 */
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #f8fafc !important; /* Memaksa warna teks terang */
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Efek saat input mendapati focus/diklik */
+.date-input:focus,
+.program-name-input:focus,
+.program-price-input:focus,
+.type-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Sembunyikan spinner/panah naik turun bawaan browser pada input harga */
+.program-price-input::-webkit-outer-spin-button,
+.program-price-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.program-price-input {
+    -moz-appearance: textfield; /* Untuk Firefox */
+}
+
+/* Perbaikan dropdown tipe sesi agar teks "Single Session" tidak terpotong */
+.type-input {
+    appearance: none; /* Hapus gaya bawaan OS */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 36px; /* Memberi ruang untuk panah custom */
+    min-width: 140px; /* Mencegah teks terpotong */
+}
+
+/* Modifikasi tombol "+ Tambah Hari / Sesi Latihan" */
+.btn-add-session-main {
+    width: 100%;
+    padding: 14px;
+    background-color: rgba(51, 65, 85, 0.5);
+    border: 1px dashed #475569;
+    color: #94a3b8;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-add-session-main:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+/* Tombol Hapus Baris Sesi kecil */
+.btn-delete-sm {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-delete-sm:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+/* Efek Hover Tombol Aksi di Modal Preview */
+.btn-action-wa:hover {
+    background-color: #1ebd59 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+}
+
+.btn-action-approve:hover {
+    background-color: #059669 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.btn-action-wa, .btn-action-approve {
+    transition: all 0.2s ease;
+}
+
+/* =======================================================
+   📱 KODE MOBILE - TRANSFORMASI NAVIGASI ATAS HORIZONTAL
+   Aman 100% Tanpa Mengubah Struktur HTML & Script JS PC
+   ======================================================= */
+@media (max-width: 768px) {
+
+    /* --- 1. PENGAMAN HEDER & TATA LETAK UTAMA --- */
+    body {
+        font-size: 14px;
+        background-color: #0f172a; 
+        overflow-x: hidden; /* Mencegah drama layar geser kanan-kiri */
+        padding-top: 60px; /* Beri ruang agar konten tidak tertutup navigasi atas */
+    }
+
+    .container {
+        width: 100% !important;
+        max-width: 480px; 
+        margin: 0 auto;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Hilangkan margin kiri PC, buat konten utama memenuhi layar HP */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 10px 0 !important;
+    }
+
+    /* --- 2. TRANSFORMATION SIDEBAR MENJADI NAVATAS HORIZONTAL --- */
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 60px !important; /* Tinggi tipis bar atas */
+        background-color: #1e293b !important;
+        z-index: 99999 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        padding: 0 10px !important;
+        box-sizing: border-box;
+        
+        /* Ubah arah susunan dari atas-bawah menjadi kiri-kanan */
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content:开; /* Biarkan menu berjejer alami */
+    }
+
+    /* Sembunyikan Logo/Brand & Profil User di HP agar space bar atas maksimal untuk Menu */
+    .sidebar .brand,
+    .sidebar .user-profile,
+    .sidebar .profile-section,
+    .sidebar [class*="profile"],
+    .sidebar [class*="user"] {
+        display: none !important;
+    }
+
+    /* Pembungkus daftar menu di dalam sidebar (biasanya berupa <ul> atau <div>) */
+    .sidebar ul, .sidebar .nav-links, .sidebar .menu-items {
+        display: flex !important;
+        flex-direction: row !important; /* Berjejer ke samping */
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        align-items: center !important;
+        gap: 8px !important;
+        
+        /* Kunci Utama: Mengaktifkan geser samping (Scroll Horizontal) via jempol */
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch; /* Scroll halus di Safari iPhone */
+    }
+
+    /* Hilangkan scrollbar bawaan browser agar bar navigasi atas terlihat estetik */
+    .sidebar ul::-webkit-scrollbar, 
+    .sidebar .nav-links::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* Merapikan item tombol menu di dalam navigasi atas */
+    .sidebar ul li, .sidebar a {
+        display: inline-block !important;
+        padding: 8px 14px !important;
+        font-size: 13px !important;
+        border-radius: 8px !important;
+        white-space: nowrap !important; /* Cegah teks menu terlipat ke bawah */
+    }
+
+    /* Matikan tombol hamburger bawaan uji coba mobile sebelumnya agar tidak mengganggu */
+    .menu-toggle-btn {
+        display: none !important;
+    }
+
+    /* --- 3. TEKUK FORM UTAMA (PILIH KLIEN & NOMOR WA) --- */
+    .form-group-row, .form-row {
+        display: flex !important;
+        flex-direction: column !important; /* Lipat menjadi atas-bawah */
+        gap: 12px !important;
+    }
+
+    .form-group-row .form-group, .form-row .form-group {
+        width: 100% !important; /* Lebar penuh yang ergonomis */
+    }
+
+    /* Optimasi area sentuh kolom input */
+    input, select, textarea {
+        width: 100% !important;
+        height: 48px !important; 
+        font-size: 15px !important; /* Anti auto-zoom otomatis di iPhone */
+        border-radius: 12px !important;
+    }
+
+    /* --- 4. TRANSOFORMASI TABEL INPUT SESI MENJADI BLOK KARTU VERTIKAL --- */
+    .table-container {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin-top: 25px;
+        overflow-x: visible !important; /* Matikan scroll horizontal tabel */
+    }
+
+    /* Paksa elemen tabel murni berperilaku seperti block layout */
+    .session-table, .main-table,
+    .session-table tbody, .main-table tbody {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Sembunyikan header teks PC karena merusak estetika kartu vertikal */
+    .session-table thead, .main-table thead {
+        display: none !important;
+    }
+
+    /* Setiap baris (TR) berubah wujud menjadi Kotak Kartu gelap premium */
+    .session-table tbody tr, .main-table tbody tr {
+        display: flex !important;
+        flex-direction: column !important; /* Input berbaris vertikal ke bawah */
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        border-radius: 16px !important;
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+        gap: 10px !important; /* Jarak renggang antar input di dalam kartu */
+    }
+
+    /* Kolom input (TD) melebar penuh secara mandiri */
+    .session-table tbody td, .main-table tbody td {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    /* Tombol Hapus Sesi dibuat memanjang penuh di dasar kartu */
+    .session-table tbody td button, 
+    .main-table tbody td button {
+        width: 100% !important;
+        height: 44px !important;
+        margin-top: 4px;
+    }
+
+    /* --- 5. ADJUSTMENT TOMBOL DRAFT & TOTAL BOX --- */
+    .btn-add-session, 
+    .btn-submit-draft, 
+    .total-box {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        border-radius: 12px !important;
+        height: 50px !important;
+    }
+}

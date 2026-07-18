@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Report — CoachLog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="sidebar">
+        <div>
+            <div class="brand">
+                <i class='bx bx-dumbbell'></i>
+                <span>CoachLog.</span>
+            </div>
+            
+            <ul class="menu-list">
+                <li>
+                    <a href="input.html" class="menu-item active">
+                        <i class='bx bx-edit-alt'></i>
+                        <span>Input Report</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="riwayat.html" class="menu-item">
+                        <i class='bx bx-history'></i>
+                        <span>Riwayat Laporan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="klien.html" class="menu-item">
+                        <i class='bx bx-group'></i>
+                        <span>Daftar Klien</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pengaturan.html" class="menu-item">
+                        <i class='bx bx-cog'></i>
+                        <span>Pengaturan</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="user-profile">
+            <i class='bx bxs-user-circle'></i>
+            <div class="user-info">
+                <h4>Head Coach</h4>
+                <p>Internal Operator</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTENT -->
+    <div class="main-content">
+        <div class="page-header">
+            <h2>Input Laporan Latihan</h2>
+            <p>Buat rincian program latihan berkala dan langsung kirimkan nota ke WhatsApp klien.</p>
+        </div>
+        <div class="panel">
+
+            <!-- Tambahkan ini tepat di bawah <div class="panel"> -->
+<input type="hidden" id="edit-draft-id" value="">
+
+            <div class="form-group">
+    <label for="client-select">Pilih Klien</label>
+    <!-- Diubah menjadi dropdown dinamis -->
+    <select id="client-select" onchange="autoFillNomorWA()" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-family: 'Inter', sans-serif;">
+        <option value="">-- Pilih Klien Terdaftar --</option>
+    </select>
+</div>
+
+<div class="form-group" style="margin-top: 15px;">
+    <label for="client-phone">Nomor WA Klien</label>
+    <!-- Diberikan tambahan color: #1e293b (warna teks gelap) agar terbaca jelas -->
+    <input type="text" id="client-phone" placeholder="Otomatis terisi..." readonly style="background-color: #e2e8f0; color: #1e293b; font-weight: 500; cursor: not-allowed; border: 1px solid #cbd5e1;">
+</div>
+
+            <div class="table-container">
+                <table class="session-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Tanggal Sesi</th>
+                            <th style="width: 35%;">Program Latihan</th>
+                            <th style="width: 20%;">Harga Satuan (Rp)</th>
+                            <th style="width: 15%;">Tipe Sesi</th>
+                            <th style="width: 10%; text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="session-body">
+                        <!-- Baris input data akan di-render di sini via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <button type="button" class="btn-add-row" onclick="tambahBarisSesi()">+ Tambah Hari / Sesi Latihan</button>
+
+            <div class="summary-box">
+                <span style="color:#94a3b8; font-weight:600;">Total Tagihan Akumulasi:</span>
+                <span class="total-price" id="total-biaya">Rp 0</span>
+            </div>
+
+            <!-- Bagian pembungkus tombol di bawah container total tagihan -->
+<div class="action-buttons-container" style="margin-top: 24px;">
+    <button type="button" class="btn-submit" onclick="simpanKeDaftarProgram()" style="background-color: #3b82f6; width: 100%;">
+        <i class='bx bx-save' style="font-size: 20px;"></i> Simpan ke Draft
+    </button>
+</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

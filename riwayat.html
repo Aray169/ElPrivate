@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Program — CoachLog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="sidebar">
+        <div>
+            <div class="brand">
+                <i class='bx bx-dumbbell'></i>
+                <span>CoachLog.</span>
+            </div>
+            
+            <ul class="menu-list">
+                <li>
+                    <a href="index.html" class="menu-item">
+                        <i class='bx bx-edit-alt'></i>
+                        <span>Input Program</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="riwayat.html" class="menu-item active">
+                        <i class='bx bx-spreadsheet'></i>
+                        <span>Daftar Program</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="klien.html" class="menu-item">
+                        <i class='bx bx-group'></i>
+                        <span>Daftar Klien</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pengaturan.html" class="menu-item">
+                        <i class='bx bx-cog'></i>
+                        <span>Pengaturan</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="user-profile">
+            <i class='bx bxs-user-circle'></i>
+            <div class="user-info">
+                <h4>Head Coach</h4>
+                <p>Internal Operator</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTENT -->
+    <div class="main-content">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h2>Daftar Program</h2>
+                <p>Manajemen seluruh blueprint rencana program latihan untuk klien.</p>
+            </div>
+            <button type="button" class="btn-delete" onclick="kosongkanRiwayat()">
+                <i class='bx bx-trash'></i> Hapus Semua
+            </button>
+        </div>
+        <div class="panel">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID Program</th>
+                        <th>Nama Klien</th>
+                        <th>Jumlah Sesi</th>
+                        <th>Total Investasi</th>
+                        <th>Status</th>
+                        <th style="text-align: center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="program-body">
+                    <!-- Data dimuat dinamis lewat JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP DETAIL (PREVIEW ONLY) -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <span class="close-btn" onclick="tutupModal()">&times;</span>
+            <h3 id="modal-title">Preview Draft</h3>
+            <p>Klien: <strong id="modal-client-name">-</strong></p>
+            
+            <input type="hidden" id="modal-program-id">
+
+            <div style="overflow-x:auto; margin-top: 15px;">
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Program</th>
+                            <th>Harga</th>
+                            <th>Tipe</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-table-body">
+                        <!-- Rincian program dimasukkan via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="total-container" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #334155; display: flex; justify-content: space-between; align-items: center;">
+                <h4>Total Investasi: <span id="modal-total-biaya" style="color: #10b981; font-weight: 700;">Rp 0</span></h4>
+                <span id="modal-status-badge" class="badge">Draft</span>
+            </div>
+
+            <div class="modal-actions" style="margin-top: 25px; display: flex; gap: 12px; justify-content: flex-end;">
+                <button type="button" class="btn-action-wa" onclick="kirimWADariPreview()" style="background-color: #25d366; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class='bx bxl-whatsapp' style="font-size: 20px;"></i> Kirim WA
+                </button>
+                <button type="button" id="btn-approve-modal" class="btn-action-approve" onclick="approveProgramDariPreview()" style="background-color: #10b981; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class='bx bx-check-circle' style="font-size: 20px;"></i> Approve
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP EDIT PROGRAM -->
+    <div id="editProgramModal" class="modal">
+        <div class="modal-content" style="max-width: 850px;">
+            <span class="close-btn" onclick="tutupModalEditProgram()">&times;</span>
+            <h3 id="edit-modal-title">Edit Detail Program Latihan</h3>
+            <p>Klien: <strong id="edit-modal-client-name">-</strong></p>
+            <input type="hidden" id="edit-program-id">
+            
+            <div style="overflow-x:auto; margin-top: 15px;">
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Program Latihan</th>
+                            <th>Harga (Rp)</th>
+                            <th>Tipe Sesi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-edit-session-body">
+                        <!-- Baris data sesi dari JavaScript dimasukkan di sini -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <button type="button" class="btn-add" onclick="tambahBarisSesiModal()" style="margin-top: 10px;">+ Tambah Sesi</button>
+            
+            <div class="total-container" style="margin-top: 20px; text-align: right;">
+                <h4>Total Akumulasi: <span id="modal-edit-total-biaya" style="color: #3b82f6;">Rp 0</span></h4>
+            </div>
+
+            <div style="margin-top: 20px; text-align: right;">
+                <button type="button" class="btn-submit" onclick="simpanPerubahanProgram()" style="background-color: #10b981;">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
