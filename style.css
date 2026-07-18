@@ -719,153 +719,93 @@ input:focus, select:focus {
 }
 
 /* =======================================================
-   📱 KODE MOBILE - TRANSFORMASI NAVIGASI ATAS HORIZONTAL
-   Aman 100% Tanpa Mengubah Struktur HTML & Script JS PC
+   📱 KODE MOBILE PRESISI & PROPORSIONAL (SISTEM LACI)
+   Aman 100% Tanpa Merusak Fungsi Script / HTML Bawaan PC
    ======================================================= */
 @media (max-width: 768px) {
 
-    /* --- 1. PENGAMAN HEDER & TATA LETAK UTAMA --- */
+    /* --- 1. PENGAMAN HALAMAN & SPACING (Beri Jarak Agar Tidak Mepet) --- */
     body {
         font-size: 14px;
         background-color: #0f172a; 
-        overflow-x: hidden; /* Mencegah drama layar geser kanan-kiri */
-        padding-top: 60px; /* Beri ruang agar konten tidak tertutup navigasi atas */
+        overflow-x: hidden; /* Cegah layar geser kanan-kiri */
     }
 
+    /* Container utama diberi padding kiri-kanan yang pas agar tidak menempel ke pinggir HP */
     .container {
         width: 100% !important;
-        max-width: 480px; 
-        margin: 0 auto;
-        padding: 16px;
+        max-width: 100% !important;
+        padding: 0 20px !important;
         box-sizing: border-box;
     }
 
-    /* Hilangkan margin kiri PC, buat konten utama memenuhi layar HP */
+    /* Konten utama digeser sedikit ke bawah agar tidak tertutup tombol hamburger */
     .main-content {
         margin-left: 0 !important;
         width: 100% !important;
-        padding: 10px 0 !important;
+        padding: 80px 0 20px 0 !important;
     }
 
-    /* --- 2. TRANSFORMATION SIDEBAR MENJADI NAVATAS HORIZONTAL --- */
-    .sidebar {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 60px !important; /* Tinggi tipis bar atas */
-        background-color: #1e293b !important;
-        z-index: 99999 !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-        padding: 0 10px !important;
-        box-sizing: border-box;
-        
-        /* Ubah arah susunan dari atas-bawah menjadi kiri-kanan */
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content:开; /* Biarkan menu berjejer alami */
-    }
-
-    /* Sembunyikan Logo/Brand & Profil User di HP agar space bar atas maksimal untuk Menu */
-    .sidebar .brand,
-    .sidebar .user-profile,
-    .sidebar .profile-section,
-    .sidebar [class*="profile"],
-    .sidebar [class*="user"] {
-        display: none !important;
-    }
-
-    /* Pembungkus daftar menu di dalam sidebar (biasanya berupa <ul> atau <div>) */
-    .sidebar ul, .sidebar .nav-links, .sidebar .menu-items {
-        display: flex !important;
-        flex-direction: row !important; /* Berjejer ke samping */
-        width: 100% !important;
-        height: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        align-items: center !important;
-        gap: 8px !important;
-        
-        /* Kunci Utama: Mengaktifkan geser samping (Scroll Horizontal) via jempol */
-        overflow-x: auto !important;
-        white-space: nowrap !important;
-        -webkit-overflow-scrolling: touch; /* Scroll halus di Safari iPhone */
-    }
-
-    /* Hilangkan scrollbar bawaan browser agar bar navigasi atas terlihat estetik */
-    .sidebar ul::-webkit-scrollbar, 
-    .sidebar .nav-links::-webkit-scrollbar {
-        display: none !important;
-    }
-
-    /* Merapikan item tombol menu di dalam navigasi atas */
-    .sidebar ul li, .sidebar a {
-        display: inline-block !important;
-        padding: 8px 14px !important;
-        font-size: 13px !important;
-        border-radius: 8px !important;
-        white-space: nowrap !important; /* Cegah teks menu terlipat ke bawah */
-    }
-
-    /* Matikan tombol hamburger bawaan uji coba mobile sebelumnya agar tidak mengganggu */
-    .menu-toggle-btn {
-        display: none !important;
-    }
-
-    /* --- 3. TEKUK FORM UTAMA (PILIH KLIEN & NOMOR WA) --- */
+    /* --- 2. PERBAIKAN FORM UTAMA (KLIEN & WA) --- */
     .form-group-row, .form-row {
         display: flex !important;
-        flex-direction: column !important; /* Lipat menjadi atas-bawah */
-        gap: 12px !important;
+        flex-direction: column !important;
+        gap: 16px !important;
     }
 
     .form-group-row .form-group, .form-row .form-group {
-        width: 100% !important; /* Lebar penuh yang ergonomis */
+        width: 100% !important;
     }
 
-    /* Optimasi area sentuh kolom input */
+    /* Ukuran Input yang Proporsional (Tinggi standar 44px, tidak terlalu raksasa) */
     input, select, textarea {
         width: 100% !important;
-        height: 48px !important; 
-        font-size: 15px !important; /* Anti auto-zoom otomatis di iPhone */
-        border-radius: 12px !important;
+        height: 44px !important; 
+        font-size: 15px !important; 
+        border-radius: 10px !important;
+        padding: 0 12px !important;
+        box-sizing: border-box;
     }
 
-    /* --- 4. TRANSOFORMASI TABEL INPUT SESI MENJADI BLOK KARTU VERTIKAL --- */
+    textarea {
+        height: auto !important;
+        min-height: 90px !important;
+        padding: 10px 12px !important;
+    }
+
+    /* --- 3. TABEL INPUT SESI (DITEKUK JADI KARTU DENGAN FLEXBOX AMAN) --- */
     .table-container {
         border: none !important;
         background: transparent !important;
         padding: 0 !important;
-        margin-top: 25px;
-        overflow-x: visible !important; /* Matikan scroll horizontal tabel */
+        margin-top: 20px;
+        overflow-x: visible !important;
     }
 
-    /* Paksa elemen tabel murni berperilaku seperti block layout */
     .session-table, .main-table,
     .session-table tbody, .main-table tbody {
         display: block !important;
         width: 100% !important;
     }
 
-    /* Sembunyikan header teks PC karena merusak estetika kartu vertikal */
+    /* Sembunyikan header tabel PC */
     .session-table thead, .main-table thead {
         display: none !important;
     }
 
-    /* Setiap baris (TR) berubah wujud menjadi Kotak Kartu gelap premium */
+    /* Setiap baris (TR) menjelma jadi kartu yang memiliki jarak (margin-bottom) */
     .session-table tbody tr, .main-table tbody tr {
         display: flex !important;
-        flex-direction: column !important; /* Input berbaris vertikal ke bawah */
+        flex-direction: column !important;
         background-color: #1e293b !important;
         border: 1px solid #334155 !important;
-        border-radius: 16px !important;
+        border-radius: 14px !important;
         padding: 16px !important;
-        margin-bottom: 16px !important;
-        gap: 10px !important; /* Jarak renggang antar input di dalam kartu */
+        margin-bottom: 20px !important;
+        gap: 12px !important;
     }
 
-    /* Kolom input (TD) melebar penuh secara mandiri */
+    /* Kolom input (TD) melebar penuh secara natural */
     .session-table tbody td, .main-table tbody td {
         display: block !important;
         width: 100% !important;
@@ -873,22 +813,87 @@ input:focus, select:focus {
         border: none !important;
     }
 
-    /* Tombol Hapus Sesi dibuat memanjang penuh di dasar kartu */
+    /* Tombol Hapus Sesi di dalam kartu */
     .session-table tbody td button, 
     .main-table tbody td button {
         width: 100% !important;
-        height: 44px !important;
+        height: 42px !important;
         margin-top: 4px;
+        border-radius: 8px !important;
     }
 
-    /* --- 5. ADJUSTMENT TOMBOL DRAFT & TOTAL BOX --- */
+    /* --- 4. TOMBOL-TOMBOL UTAMA --- */
     .btn-add-session, 
     .btn-submit-draft, 
     .total-box {
         width: 100% !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        border-radius: 12px !important;
-        height: 50px !important;
+        border-radius: 10px !important;
+        height: 46px !important;
+    }
+
+    /* --- 5. SISTEM SIDEBAR LACI DYNAMIC (ANTI LAYAR KOSONG & POTONG) --- */
+    
+    /* Tombol Hamburger diposisikan manis di pojok kiri atas */
+    .menu-toggle-btn {
+        display: block !important;
+        position: fixed !important;
+        top: 16px;
+        left: 20px;
+        font-size: 22px;
+        background: none;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        z-index: 10001 !important;
+    }
+
+    /* Sembunyikan text logo/brand bawaan PC di laci HP agar tidak tabrakan */
+    .sidebar .brand {
+        display: none !important;
+    }
+
+    /* Laci Menu Samping */
+    .sidebar {
+        position: fixed !important;
+        top: 0;
+        left: -280px; /* Sembunyikan total ke kiri luar layar */
+        width: 260px;
+        height: 100dvh !important; /* Mengikuti tinggi layar HP secara dinamis */
+        background-color: #1e293b !important;
+        z-index: 99999 !important;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
+        padding: 30px 20px !important;
+        box-sizing: border-box;
+        
+        /* Flexbox vertikal untuk mengunci profil user di paling bawah */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important; 
+        overflow-y: auto !important; /* Laci bisa di-scroll mandiri jika menu penuh */
+    }
+
+    /* Ketika class .active dipicu oleh script saat hamburger diklik */
+    .sidebar.active {
+        left: 0 !important;
+    }
+
+    /* Overlay Gelap di belakang laci menu */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(3px);
+        z-index: 99998 !important;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
     }
 }
