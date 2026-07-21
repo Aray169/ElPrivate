@@ -783,3 +783,36 @@ document.addEventListener('DOMContentLoaded', function() {
     loadPengaturan();
 });
 
+
+// =======================================================
+// 🔄 SINKRONISASI NAMA HEAD COACH DARI PENGATURAN
+// =======================================================
+function loadUserProfile() {
+    // Ambil nama dari LocalStorage (default jika belum diset: "Head Coach")
+    const savedName = localStorage.getItem('coach_name') || 'Head Coach';
+    const savedRole = localStorage.getItem('coach_role') || 'Head Coach';
+
+    // Update Tampilan Mobile
+    const mobileNameEl = document.getElementById('mobile-user-name');
+    const mobileRoleEl = document.getElementById('mobile-user-role');
+    const mobileAvatarEl = document.getElementById('mobile-avatar-initial');
+
+    if (mobileNameEl) mobileNameEl.innerText = savedName;
+    if (mobileRoleEl) mobileRoleEl.innerText = savedRole;
+    
+    // Set Inisial Avatar (Huruf Pertama Nama)
+    if (mobileAvatarEl && savedName) {
+        mobileAvatarEl.innerText = savedName.charAt(0).toUpperCase();
+    }
+
+    // Update Tampilan Desktop
+    const desktopNames = document.querySelectorAll('.user-name-display');
+    const desktopRoles = document.querySelectorAll('.user-role-display');
+
+    desktopNames.forEach(el => el.innerText = savedName);
+    desktopRoles.forEach(el => el.innerText = savedRole);
+}
+
+// Jalankan otomatis saat halaman dimuat
+document.addEventListener('DOMContentLoaded', loadUserProfile);
+
