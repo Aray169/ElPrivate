@@ -348,7 +348,7 @@ BCA 7380621830 A.N Rafaeldo
 
 
 ⚡ TRAIN TO IMPROVE YOUR PERFORMANCE ⚡
-Secure your next session and keep making progress ss!
+Secure your next session and keep making progress !!!
 #ELprivate #ELperformance #BeyondYourLimits
 
 _Rencana program resmi diterbitkan oleh:_
@@ -671,148 +671,117 @@ window.onload = function() {
     }
 };
 
-// 1. Fungsi untuk menyimpan data pengaturan ke localStorage
+// =======================================================
+// 💾 1. FUNGSI MENYIMPAN PENGATURAN (FORM SUBMIT)
+// =======================================================
 function simpanPengaturan() {
-    const headCoach = document.getElementById('input-head-coach').value.trim();
-    const namaKursus = document.getElementById('input-nama-kursus').value.trim();
+    const inputCoach = document.getElementById('input-head-coach');
+    const inputKursus = document.getElementById('input-nama-kursus');
 
-    if (!headCoach || !namaKursus) {
-        alert("Harap isi kedua bidang pengaturan terlebih dahulu!");
-        return;
-    }
+    if (!inputCoach || !inputKursus) return;
 
-    const profilCoach = {
-        headCoach: headCoach,
-        namaKursus: namaKursus
-    };
-
-    localStorage.setItem('profil_coach', JSON.stringify(profilCoach));
-    alert("✅ Pengaturan profil berhasil disimpan!");
-}
-
-// 2. Fungsi untuk menampilkan kembali data yang tersimpan saat halaman dibuka
-function loadPengaturan() {
-    const profilCoach = JSON.parse(localStorage.getItem('profil_coach'));
-    if (profilCoach) {
-        if (document.getElementById('input-head-coach')) {
-            document.getElementById('input-head-coach').value = profilCoach.headCoach;
-        }
-        if (document.getElementById('input-nama-kursus')) {
-            document.getElementById('input-nama-kursus').value = profilCoach.namaKursus;
-        }
-    }
-}
-
-// Jalankan fungsi load saat halaman web selesai dimuat
-document.addEventListener('DOMContentLoaded', function() {
-    loadPengaturan();
-});
-
-// ==========================================
-// FITUR PENGATURAN PROFIL COACH (DYNAMIC SIDEBAR)
-// ==========================================
-
-function simpanPengaturan() {
-    const headCoach = document.getElementById('input-head-coach').value.trim();
-    const namaKursus = document.getElementById('input-nama-kursus').value.trim();
+    const headCoach = inputCoach.value.trim();
+    const namaKursus = inputKursus.value.trim();
 
     if (!headCoach || !namaKursus) {
         alert("⚠️ Harap isi nama Head Coach dan nama Kursus/Gym terlebih dahulu!");
         return;
     }
 
+    // Simpan ke LocalStorage sebagai JSON
     const profilCoach = {
         headCoach: headCoach,
         namaKursus: namaKursus
     };
 
     localStorage.setItem('profil_coach', JSON.stringify(profilCoach));
-    
-    // Update langsung elemen sidebar setelah disimpan
-    updateSidebarProfil(headCoach, namaKursus);
-    
+
+    // Langsung update tampilan tanpa perlu reload halaman
+    updateSemuaTampilanProfil(headCoach, namaKursus);
+
     alert("✅ Pengaturan profil berhasil disimpan!");
 }
 
+// =======================================================
+// 🔄 2. FUNGSI MEMUAT DATA DARI LOCALSTORAGE
+// =======================================================
 function loadPengaturan() {
-    const profilCoach = JSON.parse(localStorage.getItem('profil_coach'));
+    const dataSaved = localStorage.getItem('profil_coach');
     
-    if (profilCoach) {
-        if (document.getElementById('input-head-coach')) {
-            document.getElementById('input-head-coach').value = profilCoach.headCoach;
+    let headCoach = "Head Coach";
+    let namaKursus = "CoachLog.";
+
+    if (dataSaved) {
+        try {
+            const profilCoach = JSON.parse(dataSaved);
+            if (profilCoach.headCoach) headCoach = profilCoach.headCoach;
+            if (profilCoach.namaKursus) namaKursus = profilCoach.namaKursus;
+        } catch (e) {
+            console.error("Gagal membaca data profil_coach dari localStorage", e);
         }
-        if (document.getElementById('input-nama-kursus')) {
-            document.getElementById('input-nama-kursus').value = profilCoach.namaKursus;
-        }
-        
-        // Aplikasikan data dari localStorage ke sidebar
-        updateSidebarProfil(profilCoach.headCoach, profilCoach.namaKursus);
-    } else {
-        // Fallback default jika data belum pernah diisi di pengaturan
-        if (document.getElementById('input-nama-kursus')) {
-            document.getElementById('input-nama-kursus').value = "";
-        }
-        // Mengubah default nama menjadi "Head Coach" dan brand menjadi "CoachLog."
-        updateSidebarProfil("Head Coach", "CoachLog.");
     }
+
+    // Isi nilai input form jika berada di halaman Pengaturan
+    const inputCoach = document.getElementById('input-head-coach');
+    const inputKursus = document.getElementById('input-nama-kursus');
+
+    if (inputCoach) inputCoach.value = dataSaved ? headCoach : "";
+    if (inputKursus) inputKursus.value = dataSaved ? namaKursus : "";
+
+    // Terapkan data ke semua komponen UI
+    updateSemuaTampilanProfil(headCoach, namaKursus);
 }
 
-// Fungsi utama untuk merombak teks Brand dan Sub-text Profil di Sidebar
-function updateSidebarProfil(nama, kursus) {
-    // 1. Ganti teks brand "CoachLog." di bagian atas sidebar
-    const brandEl = document.querySelector('.brand span');
-    if (brandEl && kursus) {
-        brandEl.textContent = kursus;
-    }
-
-    // 2. Ganti nama utama di profil bawah menjadi nama Coach (e.g., Rafaeldo)
-    const profileNameEl = document.querySelector('.user-info h4');
-    if (profileNameEl && nama) {
-        profileNameEl.textContent = nama;
-    }
-
-    // 3. Ganti sub-teks "Internal Operator" menjadi "Head Coach"
-    const profileRoleEl = document.querySelector('.user-info p');
-    if (profileRoleEl) {
-        profileRoleEl.textContent = "Head Coach";
-    }
-}
-
-// Pastikan fungsi berjalan otomatis di setiap halaman
-document.addEventListener('DOMContentLoaded', function() {
-    loadPengaturan();
-});
-
-
 // =======================================================
-// 🔄 SINKRONISASI NAMA HEAD COACH DARI PENGATURAN
+// 🎯 3. FUNGSI UPDATE UI (DESKTOP SIDEBAR + MOBILE HEADER)
 // =======================================================
-function loadUserProfile() {
-    // Ambil nama dari LocalStorage (default jika belum diset: "Head Coach")
-    const savedName = localStorage.getItem('coach_name') || 'Head Coach';
-    const savedRole = localStorage.getItem('coach_role') || 'Head Coach';
+function updateSemuaTampilanProfil(nama, kursus) {
+    // --- A. UPDATE DESKTOP SIDEBAR ---
+    const desktopBrand = document.querySelector('.sidebar .brand span');
+    const desktopName  = document.querySelector('.sidebar .user-info h4');
+    const desktopRole  = document.querySelector('.sidebar .user-info p');
 
-    // Update Tampilan Mobile
-    const mobileNameEl = document.getElementById('mobile-user-name');
-    const mobileRoleEl = document.getElementById('mobile-user-role');
+    if (desktopBrand) desktopBrand.textContent = kursus;
+    if (desktopName)  desktopName.textContent = nama;
+    if (desktopRole)  desktopRole.textContent = "Head Coach";
+
+    // --- B. UPDATE MOBILE HEADER ---
+    const mobileGymEl    = document.getElementById('mobile-gym-name');
+    const mobileNameEl   = document.getElementById('mobile-user-name');
+    const mobileRoleEl   = document.getElementById('mobile-user-role');
     const mobileAvatarEl = document.getElementById('mobile-avatar-initial');
 
-    if (mobileNameEl) mobileNameEl.innerText = savedName;
-    if (mobileRoleEl) mobileRoleEl.innerText = savedRole;
-    
-    // Set Inisial Avatar (Huruf Pertama Nama)
-    if (mobileAvatarEl && savedName) {
-        mobileAvatarEl.innerText = savedName.charAt(0).toUpperCase();
+    if (mobileGymEl)  mobileGymEl.textContent = kursus;
+    if (mobileNameEl) mobileNameEl.textContent = nama;
+    if (mobileRoleEl) mobileRoleEl.textContent = "Head Coach";
+
+    // Set Huruf Depan Avatar Mobile (Contoh: "Rafael" -> "R")
+    if (mobileAvatarEl && nama.trim() !== '') {
+        mobileAvatarEl.textContent = nama.trim().charAt(0).toUpperCase();
     }
 
-    // Update Tampilan Desktop
-    const desktopNames = document.querySelectorAll('.user-name-display');
-    const desktopRoles = document.querySelectorAll('.user-role-display');
-
-    desktopNames.forEach(el => el.innerText = savedName);
-    desktopRoles.forEach(el => el.innerText = savedRole);
+    // --- C. UPDATE ELEMEN DENGAN CLASS GLOBAL (JIKA ADA) ---
+    document.querySelectorAll('.user-name-display').forEach(el => el.textContent = nama);
+    document.querySelectorAll('.user-role-display').forEach(el => el.textContent = "Head Coach");
+    document.querySelectorAll('.gym-name-display').forEach(el => el.textContent = kursus);
 }
 
-// Jalankan otomatis saat halaman dimuat
-document.addEventListener('DOMContentLoaded', loadUserProfile);
+// =======================================================
+// 📅 4. FUNGSI UPDATE TANGGAL AUTOMATIS HARIAN
+// =======================================================
+function updateMobileDate() {
+    const dateEl = document.getElementById('mobile-current-date');
+    if (dateEl) {
+        const today = new Date();
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        dateEl.textContent = today.toLocaleDateString('id-ID', options);
+    }
+}
 
+// =======================================================
+// 🚀 INITIATOR (JALANKAN SAAT OTOMATIS LOAD)
+// =======================================================
+document.addEventListener('DOMContentLoaded', () => {
+    loadPengaturan();
+    updateMobileDate();
+});
