@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 🚀 PWA MANIFEST & CONFIGURATION -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CoachLog">
+    <meta name="apple-mobile-web-app-title" content="Coaching">
     <link rel="apple-touch-icon" href="icon-192.png">
-    <title>Daftar Program — CoachLog</title>
+
+    <title>Daftar Program — Coaching</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -213,6 +220,14 @@
             <span>Setel</span>
         </a>
     </nav>
+
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('Service Worker Registered'))
+      .catch((err) => console.log('SW Register Error:', err));
+  }
+</script>
 
     <script src="script.js"></script>
 </body>
