@@ -105,13 +105,15 @@ body {
 }
 
 /* MAIN CONTENT STYLES */
+/* MAIN CONTENT STYLES */
 .main-content {
     flex: 1;
     padding: 40px;
     overflow-y: auto;
+    overflow-x: hidden; /* 🌟 KUNCI UTAMA: Memaksa browser memotong elemen yang bocor ke kanan */
     height: 100vh;
+    min-width: 0;       /* 🌟 KUNCI KEDUA: Memaksa flexbox untuk bisa menyusut secara fleksibel */
 }
-
 .page-header {
     margin-bottom: 32px;
 }
@@ -650,8 +652,11 @@ input:focus, select:focus {
     -webkit-appearance: none;
     margin: 0;
 }
+
 .program-price-input {
+    -webkit-appearance: none; /* Untuk Chrome, Safari, Edge */
     -moz-appearance: textfield; /* Untuk Firefox */
+    appearance: textfield; /* Standard property untuk menghilangkan warning VS Code */
 }
 
 /* Perbaikan dropdown tipe sesi agar teks "Single Session" tidak terpotong */
@@ -718,182 +723,453 @@ input:focus, select:focus {
     transition: all 0.2s ease;
 }
 
-/* =======================================================
-   📱 KODE MOBILE PRESISI & PROPORSIONAL (SISTEM LACI)
-   Aman 100% Tanpa Merusak Fungsi Script / HTML Bawaan PC
-   ======================================================= */
-@media (max-width: 768px) {
+/* Sembunyikan scrollbar untuk Chrome, Safari, dan Opera */
+.main-content::-webkit-scrollbar {
+    display: none;
+}
 
-    /* --- 1. PENGAMAN HALAMAN & SPACING (Beri Jarak Agar Tidak Mepet) --- */
+/* Sembunyikan scrollbar untuk IE, Edge, dan Firefox */
+.main-content {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* ==========================================================================
+   FORCE LOCK VIEWPORT (Taruh di paling bawah file style.css)
+   ========================================================================== */
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+}
+
+.main-content {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Sembunyikan paksa tombol hamburger jika tidak sengaja muncul di versi desktop */
+.hamburger-menu-btn {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* ==========================================================================
+   📱 MOBILE STYLING — KONTRAS HEADER, CARD SHEET & FULL OPTIMIZED MOBILE
+   ========================================================================== */
+
+.mobile-header, .bottom-nav {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    /* 1. Base Layout Setup */
     body {
-        font-size: 14px;
-        background-color: #0f172a; 
-        overflow-x: hidden; /* Cegah layar geser kanan-kiri */
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: #090d16 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+        font-size: 13px !important;
     }
 
-    /* Container utama diberi padding kiri-kanan yang pas agar tidak menempel ke pinggir HP */
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 20px !important;
-        box-sizing: border-box;
+    /* 2. Sembunyikan Sidebar Desktop Total */
+    .sidebar, .mobile-sidebar-overlay, .mobile-hamburger-btn {
+        display: none !important;
     }
 
-    /* Konten utama digeser sedikit ke bawah agar tidak tertutup tombol hamburger */
+    /* 3. Header Mobile Kontras Utama */
+    .mobile-header {
+        display: flex !important;
+        flex-direction: column;
+        background-color: #090d16;
+        padding: 20px 20px 32px 20px;
+        color: #ffffff;
+    }
+
+    .mobile-header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .mobile-header-top .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .mobile-header-top .brand i {
+        font-size: 26px;
+        color: #6366f1;
+    }
+
+    .mobile-header-top .brand span {
+        font-size: 19px;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+    }
+
+    .mobile-profile-section {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        position: relative;
+    }
+
+    .profile-avatar {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #e11d48, #be123c);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+        box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
+        flex-shrink: 0;
+    }
+
+    .profile-text {
+        flex-grow: 1;
+    }
+
+    .profile-text h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #f8fafc;
+        margin: 0 0 2px 0;
+    }
+
+    .profile-text p {
+        font-size: 12px;
+        font-weight: 500;
+        color: #6366f1;
+        margin: 0;
+    }
+
+    .mobile-date-box {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background-color: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        color: #94a3b8;
+    }
+
+    .mobile-date-box i {
+        color: #6366f1;
+    }
+
+    /* 4. MAIN CONTENT — CARD SHEET CONTAINER */
     .main-content {
         margin-left: 0 !important;
         width: 100% !important;
-        padding: 80px 0 20px 0 !important;
+        background-color: #1e293b !important;
+        border-top-left-radius: 24px !important;
+        border-top-right-radius: 24px !important;
+        padding: 16px 12px 90px 12px !important;
+        margin-top: -12px !important;
+        min-height: calc(100vh - 160px);
+        box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+        box-sizing: border-box !important;
     }
 
-    /* --- 2. PERBAIKAN FORM UTAMA (KLIEN & WA) --- */
-    .form-group-row, .form-row {
+    /* 🚀 HERO HEADER CARD MOBILE (Pengganti Teks Polos yang Bentrok) */
+    .page-header, 
+    .content-header,
+    .main-content > header,
+    .main-content > div:first-child {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        border: 1px solid #334155 !important;
+        border-radius: 14px !important;
+        padding: 14px 14px 16px 14px !important;
+        margin-bottom: 14px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+        
         display: flex !important;
         flex-direction: column !important;
-        gap: 16px !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        position: relative !important;
     }
 
-    .form-group-row .form-group, .form-row .form-group {
+    .page-header-text,
+    .header-title-container,
+    .page-header > div:first-child {
+        width: 100% !important;
+        display: block !important;
+    }
+
+    /* Judul Halaman Mobile */
+    .main-content h1, 
+    .main-content h2,
+    .page-title,
+    .content-title {
+        font-size: 17px !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        margin: 0 0 4px 0 !important;
+        line-height: 1.25 !important;
+        letter-spacing: -0.3px !important;
+        display: block !important;
         width: 100% !important;
     }
 
-    /* Ukuran Input yang Proporsional (Tinggi standar 44px, tidak terlalu raksasa) */
-    input, select, textarea {
+    /* Deskripsi Subtitle */
+    .main-content p,
+    .page-subtitle,
+    .content-subtitle,
+    .page-header p {
+        font-size: 11px !important;
+        line-height: 1.45 !important;
+        color: #94a3b8 !important;
+        margin: 0 !important;
+        display: block !important;
         width: 100% !important;
-        height: 44px !important; 
-        font-size: 15px !important; 
-        border-radius: 10px !important;
+        white-space: normal !important;
+    }
+
+    /* Tombol Aksi Kanan (misal: + Tambah Klien / Hapus Semua) */
+    .page-header .btn,
+    .page-header button,
+    .content-header .btn,
+    .content-header button,
+    .header-action-btn {
+        position: static !important;
+        float: none !important;
+        width: 100% !important;
+        height: 38px !important;
+        margin-top: 6px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+    }
+
+    /* 5. FORM INPUT UTAMA & DROPDOWN */
+    .panel {
+        background-color: #0f172a !important;
+        border: 1px solid #334155 !important;
+        border-radius: 12px !important;
+        padding: 14px !important;
+        margin-top: 10px !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .form-group {
+        margin-bottom: 12px !important;
+        width: 100% !important;
+    }
+
+    .form-group label, label {
+        display: block !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: #94a3b8 !important;
+        margin-bottom: 5px !important;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    /* Input & Textarea */
+    .form-group input, 
+    input, textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 40px !important; 
+        font-size: 13px !important; 
+        border-radius: 8px !important;
         padding: 0 12px !important;
-        box-sizing: border-box;
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        box-sizing: border-box !important;
     }
 
-    textarea {
-        height: auto !important;
-        min-height: 90px !important;
-        padding: 10px 12px !important;
+    /* 🚨 FIX DROPDOWN/SELECT DI HP 🚨 */
+    select, .form-group select, td select {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: 40px !important;
+        font-size: 13px !important;
+        border-radius: 8px !important;
+        padding: 0 28px 0 10px !important;
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        box-sizing: border-box !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 10px center !important;
+        background-size: 16px !important;
     }
 
-    /* --- 3. TABEL INPUT SESI (DITEKUK JADI KARTU DENGAN FLEXBOX AMAN) --- */
+    select option {
+        font-size: 13px !important;
+        background-color: #0f172a !important;
+        color: #ffffff !important;
+        padding: 10px !important;
+        max-width: 100% !important;
+    }
+
+    /* 6. REVISI KARTU SESI (FULL WIDTH) */
     .table-container {
         border: none !important;
         background: transparent !important;
-        padding: 0 !important;
-        margin-top: 20px;
         overflow-x: visible !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin-top: 12px !important;
     }
 
+    table, thead, tbody, th, td, tr,
     .session-table, .main-table,
     .session-table tbody, .main-table tbody {
         display: block !important;
         width: 100% !important;
+        box-sizing: border-box !important;
     }
 
-    /* Sembunyikan header tabel PC */
-    .session-table thead, .main-table thead {
+    thead, .session-table thead, .main-table thead {
         display: none !important;
     }
 
-    /* Setiap baris (TR) menjelma jadi kartu yang memiliki jarak (margin-bottom) */
-    .session-table tbody tr, .main-table tbody tr {
+    tbody tr, .session-table tbody tr, .main-table tbody tr {
         display: flex !important;
         flex-direction: column !important;
-        background-color: #1e293b !important;
+        background-color: #0f172a !important;
         border: 1px solid #334155 !important;
-        border-radius: 14px !important;
-        padding: 16px !important;
-        margin-bottom: 20px !important;
-        gap: 12px !important;
+        border-radius: 12px !important;
+        padding: 12px !important;
+        margin-bottom: 12px !important;
+        gap: 10px !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    /* Kolom input (TD) melebar penuh secara natural */
-    .session-table tbody td, .main-table tbody td {
+    td, .session-table tbody td, .main-table tbody td {
         display: block !important;
         width: 100% !important;
         padding: 0 !important;
         border: none !important;
+        text-align: left !important;
     }
 
-    /* Tombol Hapus Sesi di dalam kartu */
-    .session-table tbody td button, 
-    .main-table tbody td button {
+    td input,
+    .session-table tbody td input {
+        width: 100% !important;
+        height: 38px !important;
+        font-size: 13px !important;
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px !important;
+        padding: 0 10px !important;
+        box-sizing: border-box !important;
+    }
+
+    td:last-child, .session-table tbody td:last-child {
+        display: flex !important;
+        justify-content: flex-end !important;
+        margin-top: 4px !important;
+    }
+
+    td:last-child button, .btn-delete, .btn-danger {
+        height: 34px !important;
+        padding: 0 16px !important;
+        font-size: 12px !important;
+        border-radius: 6px !important;
+    }
+
+    /* 7. Summary Box & Button Utama */
+    .summary-box, .total-box {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        background-color: #0f172a !important;
+        padding: 12px 14px !important;
+        border-radius: 10px !important;
+        border: 1px solid #334155 !important;
+        margin-top: 10px !important;
+        height: 48px !important;
+        box-sizing: border-box !important;
+    }
+
+    .btn-add-row, .btn-submit, .btn-add-session, .btn-submit-draft {
         width: 100% !important;
         height: 42px !important;
-        margin-top: 4px;
+        padding: 0 12px !important;
         border-radius: 8px !important;
-    }
-
-    /* --- 4. TOMBOL-TOMBOL UTAMA --- */
-    .btn-add-session, 
-    .btn-submit-draft, 
-    .total-box {
-        width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        border-radius: 10px !important;
-        height: 46px !important;
-    }
-
-    /* --- 5. SISTEM SIDEBAR LACI DYNAMIC (ANTI LAYAR KOSONG & POTONG) --- */
-    
-    /* Tombol Hamburger diposisikan manis di pojok kiri atas */
-    .menu-toggle-btn {
-        display: block !important;
-        position: fixed !important;
-        top: 16px;
-        left: 20px;
-        font-size: 22px;
-        background: none;
-        border: none;
-        color: #ffffff;
-        cursor: pointer;
-        z-index: 10001 !important;
-    }
-
-    /* Sembunyikan text logo/brand bawaan PC di laci HP agar tidak tabrakan */
-    .sidebar .brand {
-        display: none !important;
-    }
-
-    /* Laci Menu Samping */
-    .sidebar {
-        position: fixed !important;
-        top: 0;
-        left: -280px; /* Sembunyikan total ke kiri luar layar */
-        width: 260px;
-        height: 100dvh !important; /* Mengikuti tinggi layar HP secara dinamis */
-        background-color: #1e293b !important;
-        z-index: 99999 !important;
-        transition: left 0.3s ease-in-out;
-        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
-        padding: 30px 20px !important;
-        box-sizing: border-box;
-        
-        /* Flexbox vertikal untuk mengunci profil user di paling bawah */
+        font-size: 13px !important;
+        font-weight: 600 !important;
         display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important; 
-        overflow-y: auto !important; /* Laci bisa di-scroll mandiri jika menu penuh */
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 10px 0 0 0 !important;
+        box-sizing: border-box !important;
     }
 
-    /* Ketika class .active dipicu oleh script saat hamburger diklik */
-    .sidebar.active {
-        left: 0 !important;
-    }
-
-    /* Overlay Gelap di belakang laci menu */
-    .sidebar-overlay {
-        display: none;
+    /* 8. Bottom Navigation Bar */
+    .bottom-nav {
+        display: flex !important;
         position: fixed;
-        top: 0;
+        bottom: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(15, 23, 42, 0.7);
-        backdrop-filter: blur(3px);
-        z-index: 99998 !important;
+        right: 0;
+        height: 65px;
+        background-color: #090d16;
+        border-top: 1px solid #1e293b;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 9999;
     }
 
-    .sidebar-overlay.active {
-        display: block;
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #64748b;
+        font-size: 11px;
+        text-decoration: none;
+        gap: 3px;
+        width: 25%;
+    }
+
+    .bottom-nav-item i {
+        font-size: 22px;
+    }
+
+    .bottom-nav-item.active {
+        color: #6366f1;
+        font-weight: 600;
     }
 }
