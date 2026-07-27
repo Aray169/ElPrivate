@@ -165,13 +165,15 @@
     </div>
 
     <!-- MODAL POPUP EDIT PROGRAM -->
-    <div id="editProgramModal" class="modal">
-        <div class="modal-content" style="max-width: 850px;">
-            <span class="close-btn" onclick="tutupModalEditProgram()">&times;</span>
-            <h3 id="edit-modal-title">Edit Detail Program Latihan</h3>
-            <p>Klien: <strong id="edit-modal-client-name">-</strong></p>
-            <input type="hidden" id="edit-program-id">
-            
+<div id="editProgramModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="tutupModalEditProgram()">&times;</span>
+        <h3 id="edit-modal-title">Edit Detail Program Latihan</h3>
+        <p>Klien: <strong id="edit-modal-client-name">-</strong></p>
+        <input type="hidden" id="edit-program-id">
+        
+        <!-- Pembungkus Scrollable untuk Tabel Sesi -->
+        <div class="modal-scroll-area">
             <div style="overflow-x:auto; margin-top: 15px;">
                 <table class="main-table">
                     <thead>
@@ -190,16 +192,17 @@
             </div>
             
             <button type="button" class="btn-add" onclick="tambahBarisSesiModal()" style="margin-top: 10px;">+ Tambah Sesi</button>
-            
-            <div class="total-container" style="margin-top: 20px; text-align: right;">
-                <h4>Total Akumulasi: <span id="modal-edit-total-biaya" style="color: #3b82f6;">Rp 0</span></h4>
-            </div>
+        </div>
 
-            <div style="margin-top: 20px; text-align: right;">
-                <button type="button" class="btn-submit" onclick="simpanPerubahanProgram()" style="background-color: #10b981;">Simpan Perubahan</button>
-            </div>
+        <div class="total-container" style="margin-top: 15px; text-align: right;">
+            <h4>Total Akumulasi: <span id="modal-edit-total-biaya" style="color: #3b82f6;">Rp 0</span></h4>
+        </div>
+
+        <div class="modal-footer-btn">
+            <button type="button" class="btn-submit" onclick="simpanPerubahanProgram()">Simpan Perubahan</button>
         </div>
     </div>
+</div>
 
     <!-- BOTTOM NAVIGATION (Hanya Tampil di Mobile) -->
     <nav class="bottom-nav">
