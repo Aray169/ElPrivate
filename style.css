@@ -430,7 +430,7 @@ input:focus, select:focus {
 }
 
 /* ==========================================
-   MODAL EDIT PROGRAM STYLING (MODERN & CLEAN)
+   MODAL EDIT PROGRAM STYLING (FIXED FOR MOBILE SCROLL)
    ========================================== */
 
 /* Overlay Latar Belakang Modal */
@@ -441,11 +441,15 @@ input:focus, select:focus {
     left: 0;
     top: 0;
     width: 100%; 
-    height: 100%; 
-    background-color: rgba(15, 23, 42, 0.6); /* Backdrop agak blur/gelap transparan */
+    height: 100vh; /* Kunci tepat selayar */
+    background-color: rgba(15, 23, 42, 0.7);
     backdrop-filter: blur(4px);
+    
+    /* Posisikan modal tepat di tengah/atas layar */
     align-items: center;
     justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 /* Tampilkan Modal dengan Flexbox saat kelas .show aktif */
@@ -455,16 +459,27 @@ input:focus, select:focus {
 
 /* Kontainer Utama Pop-up */
 .modal-content {
-    background-color: #1e293b; /* Slate 800 - Senada dengan background app */
+    background-color: #1e293b;
     color: #f8fafc;
-    padding: 30px;
+    padding: 20px;
+    
+    /* PENTING: Beri ruang aman di bawah agar tombol simpan tidak tertutup Bottom Nav */
+    padding-bottom: 90px !important; 
+    
     border-radius: 16px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
     border: 1px solid #334155;
     position: relative;
-    width: 90%;
+    width: 100%;
     max-width: 850px;
-    animation: modalFadeIn 0.3s ease-out;
+    
+    /* PENTING: Batasi tinggi maksimal agar tidak menembus layar */
+    max-height: 88vh; 
+    
+    /* PENTING: Aktifkan scroll di dalam kontainer modal ini */
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch; /* Biar scroll di HP halus/smooth */
+    box-sizing: border-box;
 }
 
 @keyframes modalFadeIn {
@@ -482,10 +497,11 @@ input:focus, select:focus {
     cursor: pointer;
     transition: color 0.2s;
     line-height: 1;
+    z-index: 10;
 }
 
 .close-btn:hover {
-    color: #ef4444; /* Berubah merah saat di-hover */
+    color: #ef4444;
 }
 
 /* Judul dan Header Modal */
@@ -494,6 +510,7 @@ input:focus, select:focus {
     font-size: 20px;
     font-weight: 600;
     color: #ffffff;
+    padding-right: 30px; /* Mencegah judul tertimpa tombol close */
 }
 
 .modal-content p {
@@ -503,7 +520,15 @@ input:focus, select:focus {
 }
 
 .modal-content p strong {
-    color: #3b82f6; /* Nama klien diberi warna aksen biru */
+    color: #3b82f6;
+}
+
+/* RESPONSIVE TABLE FOR MOBILE: Mengatasi tabel meluap ke kanan di layar HP */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 16px;
 }
 
 /* Styling Tabel Dinamis di Dalam Modal */
@@ -511,6 +536,7 @@ input:focus, select:focus {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 16px;
+    min-width: 500px; /* Mencegah input tabel terhimpit di HP */
 }
 
 .main-table th {
@@ -534,10 +560,10 @@ input:focus, select:focus {
 .modal-type-input {
     width: 100%;
     padding: 10px 12px;
-    background-color: #0f172a; /* Latar belakang input gelap (Slate 900) */
+    background-color: #0f172a;
     border: 1px solid #334155;
     border-radius: 8px;
-    color: #f8fafc; /* Warna teks putih/terang */
+    color: #f8fafc;
     font-size: 14px;
     outline: none;
     transition: border-color 0.2s;
@@ -548,7 +574,7 @@ input:focus, select:focus {
 .modal-program-name-input:focus,
 .modal-program-price-input:focus,
 .modal-type-input:focus {
-    border-color: #3b82f6; /* Highlight biru saat fokus */
+    border-color: #3b82f6;
 }
 
 /* Menghilangkan spinner bawaan pada input number harga */
@@ -592,7 +618,7 @@ input:focus, select:focus {
 .btn-submit {
     width: 100%;
     padding: 14px;
-    background-color: #10b981; /* Hijau Emerald */
+    background-color: #10b981;
     color: #ffffff;
     border: none;
     border-radius: 10px;
@@ -605,6 +631,16 @@ input:focus, select:focus {
 
 .btn-submit:hover {
     background-color: #059669;
+}
+
+/* Media Query khusus HP untuk penyesuaian padding */
+@media screen and (max-width: 640px) {
+    .modal {
+        padding: 10px;
+    }
+    .modal-content {
+        padding: 16px;
+    }
 }
 
 /* ==========================================
