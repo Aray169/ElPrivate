@@ -1,4 +1,4 @@
-const CACHE_NAME = 'coaching-v2';
+const CACHE_NAME = 'coaching-v3'; // Naikkan versi ke v3
 const assetsToCache = [
   './',
   './index.html',
@@ -10,9 +10,9 @@ const assetsToCache = [
   './manifest.json'
 ];
 
-// Install Service Worker & Simpan Cache
+// Install Service Worker & Simpan Cache Awali
 self.addEventListener('install', e => {
-  self.skipWaiting(); // Langsung aktifkan SW baru
+  self.skipWaiting(); // Paksa SW baru langsung aktif
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(assetsToCache);
@@ -27,26 +27,39 @@ self.addEventListener('activate', e => {
       return Promise.all(
         keys.map(key => {
           if (key !== CACHE_NAME) {
+            console.log('Menghapus cache lama:', key);
             return caches.delete(key);
           }
         })
       );
     })
   );
-  return self.clients.claim();
+  return self.clients.claim(); // Ambil alih semua tab yang terbuka
 });
 
-// Ambil data dari Cache / Network
+// AMBIL DATA: Strategi Network-First (Prioritas Internet, Offline ke Cache)
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(cachedResponse => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(e.request).catch(() => {
-        // Fallback jika benar-benar offline & file tidak ditemukan di cache
-        return caches.match('./index.html');
-      });
-    })
+    fetch(e.request)
+      .then(networkResponse => {
+        // Jika berhasil ambil dari internet, perbarui simpanan di cache
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(e.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        // Jika OFFLINE (internet gagal), ambil dari Cache
+        return caches.match(e.request).then(cachedResponse => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          // Fallback jika file halaman tidak ditemukan saat offline
+          return caches.match('./index.html');
+        });
+      })
   );
 });
